@@ -1,132 +1,166 @@
+from cmath import sqrt
 import statistics
 import numpy as np
 import math
 import scipy.stats as st
 from scipy.stats import t as t_student
 
-# Se vc não conhecer a média use n-1 nos graus de lib
-def teste_chi_bilateral(h0,graus,var,alpha):
-    chicalc=graus*var/h0
-    print("qui_quad_calc",chicalc)
+def bilateral_conhecido(m, s, n, x, alpha):  
+    z = (x - m) / np.sqrt((s**2) / n)
 
-    X1=st.chi2.ppf((alpha/100)/2,graus)
-    X2=st.chi2.ppf(1-(alpha/100)/2,graus)
-    print("O valor do qui1 é:",X1, "O valor de qui2 é:", X2)
+    print(z)
 
-    if chicalc>X1 and chicalc<X2:
-        print("Decide-se não rejeitar a hipótese inicial pois tcalc pertence à RNR")
-    else:
-        print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
-
-def teste_chi_esquerda(h0,graus,var,alpha):
-    chicalc=graus*var/h0
-    print("qui_quad_calc",chicalc)
-
-    X=st.chi2.ppf(alpha/100,graus)
-    
-    print("O valor do qui_quadrado é:",X)
-
-    if chicalc > X:
-        print("Decide-se não rejeitar a hipótese inicial pois tcalc pertence à RNR")
-    else:
-        print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
-
-
-def teste_chi_direita(h0,graus,var,alpha):
-    chicalc=graus*var/h0
-    print("qui_quad_calc",chicalc)
-
-    X=st.chi2.ppf(1-alpha/100,graus)
-
-    print("O valor do qui_quadrado é:",X)
-
-    if chicalc <X:
-        print("Decide-se não rejeitar a hipótese inicial pois tcalc pertence à RNR")
-    else:
-     print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
-
-
-
-def bilateral(m, s_2, n, x, alpha, z_cacl_func):
-    z_cale = z_cacl_func(m, s_2, n, x, alpha)
-    
     z1 = st.norm.ppf(((100-(alpha/2))/100), loc=0, scale=1)
     z2 = st.norm.ppf(1-((100-(alpha/2))/100), loc=0, scale=1)
 
-    if z_cale > z2 and z_cale < z1:
+    if z > z2 and z < z1:
         print("Decide-se não rejeitar a hipótese inicial pois tcalc pertence à RNR")
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def esquerda(m, s_2, n, x, alpha, z_cacl_func):
-    z_cale = z_cacl_func(m, s_2, n, x, alpha)
-    
+def esquerda_conhecido(m, s, n, x, alpha):
+    z = (x - m) / np.sqrt((s**2) / n)
+
+    print(z)
+
     z2 = st.norm.ppf(1-((100-(alpha))/100), loc=0, scale=1)
 
-    if z_cale > z2 :
+    if z > z2 :
         print("Decide-se não rejeitar a hipótese inicial pois tcalc pertence à RNR")
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def direita(m, s_2, n, x, alpha, z_cacl_func):
-    z_cale = z_cacl_func(m, s_2, n, x, alpha)
+def direita_conhecido(m, s, n, x, alpha):
+    z = (x - m) / np.sqrt((s**2) / n)
     
+    print(z)
+        
     z1 = st.norm.ppf(((100-(alpha))/100), loc=0, scale=1)
 
-    if z_cale < z1:
+    if z < z1:
         print("Decide-se não rejeitar a hipótese inicial pois tcalc pertence à RNR")
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def teste_populacoes_normais_conhecidas(m, s_2, n, x, alpha, metodo):
-    z_calc_func = lambda m, s_2, n, x, alpha: (x - m) / (np.sqrt(s_2 / n))
 
-    metodo(m, s_2, n, x, alpha, z_calc_func)
-
-def bilateral_desconhecido(n, alpha, z):
-    z_cale = z
+def bilateral_desconhecido(m, s, n, x, alpha):
+    z = (x - m) / np.sqrt((s**2) / n)
     phi = n - 1
-    
+
+    print(z)
+
     z1 = t_student.ppf(1 - ((alpha/100)) / 4, phi)
     z2 = t_student.ppf((alpha/100) / 4, phi)
 
-    print(z1, z2, z_cale)
-
-    if z_cale > z2 and z_cale < z1:
+    if z > z2 and z < z1:
         print("Decide-se não rejeitar a hipótese inicial pois tcalc pertence à RNR")
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def esquerda_desconhecido(n, alpha, z):
-    z_cale = z
+def esquerda_desconhecido(m, s, n, x, alpha):
+    z = (x - m) / np.sqrt((s**2) / n)
     phi = n - 1
     
+    print(z)
+
     z2 = t_student.ppf((alpha/100), phi)
 
-    print(z2)
-
-    if z_cale > z2:
+    if z > z2:
         print("Decide-se não rejeitar a hipótese inicial pois tcalc pertence à RNR")
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def direita_desconhecido(n, alpha, z):
-    z_cale = z
+def direita_desconhecido(m, s, n, x, alpha):
+    z = (x - m) / np.sqrt((s**2) / n)
     phi = n - 1
+
+    print(z)
     
     z1 = t_student.ppf(1 - ((alpha/100)), phi)
 
-    print(z1)
-
-    if z_cale < z1:
+    if z < z1:
         print("Decide-se não rejeitar a hipótese inicial pois tcalc pertence à RNR")
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-# teste_populacoes_normais_conhecidas(206, 12, 30, 210, 10, direita)
-#print(t_student.ppf(5/100, 24))
 
-z = (25.3 - 26) / (np.sqrt(5.86 / 10))
-print(z)
+def bilateral_proprocao_normal(p, p0, q0, n, alpha):
+    z = (p0 - p) / np.sqrt((p0 * q0) / n)
 
-print(direita_desconhecido(10, 10, 4.22))
+    print(z)
+
+    z1 = st.norm.ppf(((100-(alpha/2))/100), loc=0, scale=1)
+    z2 = st.norm.ppf(1-((100-(alpha/2))/100), loc=0, scale=1)
+
+    if z > z2 and z < z1:
+        print("Decide-se não rejeitar a hipótese inicial pois tcalc pertence à RNR")
+    else:
+        print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
+
+def esquerda_proprocao_normal(p, p0, q0, n, alpha):
+    z = (p0 - p) / np.sqrt((p0 * q0) / n)
+
+    print(z)
+
+    z2 = st.norm.ppf(1-((100-(alpha))/100), loc=0, scale=1)
+
+    if z > z2 :
+        print("Decide-se não rejeitar a hipótese inicial pois tcalc pertence à RNR")
+    else:
+        print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
+
+def direita_proprocao_normal(p, p0, q0, n, alpha):
+    z = (p0 - p) / np.sqrt((p0 * q0) / n)
+
+    print(z)
+
+    z1 = st.norm.ppf(((100-(alpha))/100), loc=0, scale=1)
+
+    print(z1)
+
+    if z < z1:
+        print("Decide-se não rejeitar a hipótese inicial pois tcalc pertence à RNR")
+    else:
+        print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
+
+
+def bilateral_diferenca_media(m, s, n, d, alpha):
+    z = (d - m) / np.sqrt((s**2) / 10)
+    phi = n - 1
+
+    print(z)
+
+    z1 = t_student.ppf(1 - ((alpha/100)) / 4, phi)
+    z2 = t_student.ppf((alpha/100) / 4, phi)
+
+    if z > z2 and z < z1:
+        print("Decide-se não rejeitar a hipótese inicial pois tcalc pertence à RNR")
+    else:
+        print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
+
+def esquerda_diferenca_media(m, s, n, d, alpha):
+    z = (d - m) / np.sqrt((s**2) / 10)
+
+    phi = n - 1
+
+    print(z)
+
+    z2 = t_student.ppf((alpha/100), phi)
+
+    if z > z2:
+        print("Decide-se não rejeitar a hipótese inicial pois tcalc pertence à RNR")
+    else:
+        print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
+
+def direita_diferenca_media(m, s, n, d, alpha):
+    z = (d - m) / np.sqrt((s**2) / 10)
+    phi = n - 1
+
+    print(z)
+
+    z1 = t_student.ppf(1 - ((alpha/100)), phi)
+
+    if z < z1:
+        print("Decide-se não rejeitar a hipótese inicial pois tcalc pertence à RNR")
+    else:
+        print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
