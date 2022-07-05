@@ -106,7 +106,7 @@ class MediaPopulacaoNormalDesconhecido:
             print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
 
-class ProprocaoPopulacaoNormal:
+class ProporcaoPopulacaoNormal:
 
     @staticmethod
     def bilateral(p, p0, q0, n, alpha):
