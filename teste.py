@@ -1,10 +1,7 @@
 from cmath import sqrt
-import statistics
 import numpy as np
-import math
 import scipy.stats as st
 from scipy.stats import t as t_student
-from scipy.stats import chi
 
 """
     Conhecido = tem valor de variancia (sigma^2)
