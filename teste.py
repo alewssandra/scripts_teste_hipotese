@@ -96,7 +96,7 @@ def direita_media_populacao_normal_desconhecido(m, s, n, x, alpha):
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
 
-def bilateral_proprocao_populacao_normal(p, p0, q0, n, alpha):
+def bilateral_proporcao_populacao_normal(p, p0, q0, n, alpha):
     z = (p0 - p) / np.sqrt((p0 * q0) / n)
 
     z1 = st.norm.ppf(((100-(alpha/2))/100), loc=0, scale=1)
@@ -109,7 +109,7 @@ def bilateral_proprocao_populacao_normal(p, p0, q0, n, alpha):
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def esquerda_proprocao_populacao_normal(p, p0, q0, n, alpha):
+def esquerda_proporcao_populacao_normal(p, p0, q0, n, alpha):
     z = (p0 - p) / np.sqrt((p0 * q0) / n)
 
     z2 = st.norm.ppf(1-((100-(alpha))/100), loc=0, scale=1)
@@ -121,7 +121,7 @@ def esquerda_proprocao_populacao_normal(p, p0, q0, n, alpha):
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def direita_proprocao_populacao_normal(p, p0, q0, n, alpha):
+def direita_proporcao_populacao_normal(p, p0, q0, n, alpha):
     z = (p0 - p) / np.sqrt((p0 * q0) / n)
 
     z1 = st.norm.ppf(((100-(alpha))/100), loc=0, scale=1)
