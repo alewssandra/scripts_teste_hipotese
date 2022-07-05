@@ -21,7 +21,7 @@ from scipy.stats import chi
     >  : Direita
 """
 
-def bilateral_conhecido(m, s, n, x, alpha):  
+def bilateral_media_populacao_normal_conhecido(m, s, n, x, alpha):  
     z = (x - m) / np.sqrt((s**2) / n)
 
     z1 = st.norm.ppf(((100-(alpha/2))/100), loc=0, scale=1)
@@ -34,7 +34,7 @@ def bilateral_conhecido(m, s, n, x, alpha):
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def esquerda_conhecido(m, s, n, x, alpha):
+def esquerda_media_populacao_normal_conhecido(m, s, n, x, alpha):
     z = (x - m) / np.sqrt((s**2) / n)
 
     z2 = st.norm.ppf(1-((100-(alpha))/100), loc=0, scale=1)
@@ -46,7 +46,7 @@ def esquerda_conhecido(m, s, n, x, alpha):
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def direita_conhecido(m, s, n, x, alpha):
+def direita_media_populacao_normal_conhecido(m, s, n, x, alpha):
     z = (x - m) / np.sqrt((s**2) / n)
             
     z1 = st.norm.ppf(((100-(alpha))/100), loc=0, scale=1)
@@ -59,7 +59,7 @@ def direita_conhecido(m, s, n, x, alpha):
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
 
-def bilateral_desconhecido(m, s, n, x, alpha):
+def bilateral_media_populacao_normal_desconhecido(m, s, n, x, alpha):
     z = (x - m) / np.sqrt((s**2) / n)
     phi = n - 1
 
@@ -73,7 +73,7 @@ def bilateral_desconhecido(m, s, n, x, alpha):
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def esquerda_desconhecido(m, s, n, x, alpha):
+def esquerda_media_populacao_normal_desconhecido(m, s, n, x, alpha):
     z = (x - m) / np.sqrt((s**2) / n)
     phi = n - 1
     
@@ -86,7 +86,7 @@ def esquerda_desconhecido(m, s, n, x, alpha):
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def direita_desconhecido(m, s, n, x, alpha):
+def direita_media_populacao_normal_desconhecido(m, s, n, x, alpha):
     z = (x - m) / np.sqrt((s**2) / n)
     phi = n - 1
     
@@ -100,7 +100,7 @@ def direita_desconhecido(m, s, n, x, alpha):
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
 
-def bilateral_proprocao_normal(p, p0, q0, n, alpha):
+def bilateral_proprocao_populacao_normal(p, p0, q0, n, alpha):
     z = (p0 - p) / np.sqrt((p0 * q0) / n)
 
     z1 = st.norm.ppf(((100-(alpha/2))/100), loc=0, scale=1)
@@ -113,7 +113,7 @@ def bilateral_proprocao_normal(p, p0, q0, n, alpha):
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def esquerda_proprocao_normal(p, p0, q0, n, alpha):
+def esquerda_proprocao_populacao_normal(p, p0, q0, n, alpha):
     z = (p0 - p) / np.sqrt((p0 * q0) / n)
 
     z2 = st.norm.ppf(1-((100-(alpha))/100), loc=0, scale=1)
@@ -125,7 +125,7 @@ def esquerda_proprocao_normal(p, p0, q0, n, alpha):
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def direita_proprocao_normal(p, p0, q0, n, alpha):
+def direita_proprocao_populacao_normal(p, p0, q0, n, alpha):
     z = (p0 - p) / np.sqrt((p0 * q0) / n)
 
     z1 = st.norm.ppf(((100-(alpha))/100), loc=0, scale=1)
@@ -180,7 +180,7 @@ def direita_diferenca_media(m, s, n, d, alpha):
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
 
-def bilateral_variancia_media_conhecida(s_2, x, n, alpha):
+def bilateral_variancia_media_conhecido(s_2, x, n, alpha):
     z = x / s_2
 
     z1 = st.chi2.ppf(((100-(alpha/2))/100), n)
@@ -193,7 +193,7 @@ def bilateral_variancia_media_conhecida(s_2, x, n, alpha):
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def esquerda_variancia_media_conhecida(s_2, x, n, alpha):
+def esquerda_variancia_media_conhecido(s_2, x, n, alpha):
     z = x / s_2
 
     z2 = st.chi2.ppf(1-((100-alpha)/100), n)
@@ -205,7 +205,7 @@ def esquerda_variancia_media_conhecida(s_2, x, n, alpha):
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def direita_variancia_media_conhecida(s_2, x, n, alpha):
+def direita_variancia_media_conhecido(s_2, x, n, alpha):
     z = x / s_2
 
     z1 = st.chi2.ppf(((100-(alpha))/100), n)
@@ -218,7 +218,7 @@ def direita_variancia_media_conhecida(s_2, x, n, alpha):
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
 
-def bilateral_variancia_media_desconhecida(s_2, x, n, alpha):
+def bilateral_variancia_media_desconhecido(s_2, x, n, alpha):
     z = x / s_2
 
     z1 = st.chi2.ppf(((100-(alpha/2))/100), n-1)
@@ -231,7 +231,7 @@ def bilateral_variancia_media_desconhecida(s_2, x, n, alpha):
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def esquerda_variancia_media_desconhecida(s_2, x, n, alpha):
+def esquerda_variancia_media_desconhecido(s_2, x, n, alpha):
     z = x / s_2
 
     z2 = st.chi2.ppf(1-((100-alpha)/100), n-1)
@@ -243,7 +243,7 @@ def esquerda_variancia_media_desconhecida(s_2, x, n, alpha):
     else:
         print("Decide-se rejeitar a hipótese inicial pois tcalc pertence à RC")
 
-def direita_variancia_media_desconhecida(s_2, x, n, alpha):
+def direita_variancia_media_desconhecido(s_2, x, n, alpha):
     z = x / s_2
 
     z1 = st.chi2.ppf(((100-(alpha))/100), n-1)
